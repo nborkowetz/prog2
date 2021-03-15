@@ -22,7 +22,6 @@ int main(int argc, char *argv[]){
     char dev0[20], dev1[20], buffer[100];
     int descriptor[2], buffer_size = 100;
 
-
     // terminale per la scrittura dei comandi 
     printf("insert first device: ");  //sostituire con IO POSIX
     scanf("%s", dev0);
