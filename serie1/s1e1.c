@@ -1,6 +1,6 @@
 //test push 
 
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <termios.h>
@@ -70,4 +70,4 @@ int main(int argc, char *argv[]){
 
         sleep(1); 
     }
-}
+}*/
