@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <termios.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -17,7 +18,9 @@ char *findExitPattern(char string[]){
 } 
 
 int main(int argc, char *argv[]){
-    pid_t pid1, pid2;
+    pid_t pid[2];
+
+    int pid_nr = sizeof(pid) / sizeof(pid[0]);
 
     const char *path  = "/usr/bin/xterm";
     char *const arg[]   = {"xterm", NULL};
@@ -29,27 +32,27 @@ int main(int argc, char *argv[]){
     int status;
 
     //creazione dei filgli
-    pid1 = fork();
+    pid[0] = fork();
     
 
-    if(pid1 < 0 ){
+    if(pid[0] < 0 ){
         printf("error \n");
         exit(EXIT_FAILURE);
     } 
-    else if(pid1 == 0 ) {
+    else if(pid[0] == 0 ) {
         status = execv("/usr/bin/xterm", arg);
         if(status == -1){
             printf("error %d with execv \n", errno);
         }
     }
     else {
-        pid2 = fork();
+        pid[1] = fork();
 
-        if(pid2 < 0 ){
+        if(pid[1] < 0 ){
             printf("error \n");
             exit(EXIT_FAILURE);
         } 
-        else if(pid2 == 0 ) {
+        else if(pid[1] == 0 ) {
             status = execv("/usr/bin/xterm", arg);
             if(status == -1){
                 printf("error %d with execv \n", errno);
