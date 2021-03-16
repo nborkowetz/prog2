@@ -42,7 +42,6 @@ int main(int argc, char *argv[]){
             printf("error %d with execv \n", errno);
         }
     }
- 
     else {
         pid2 = fork();
 
@@ -56,7 +55,6 @@ int main(int argc, char *argv[]){
                 printf("error %d with execv \n", errno);
             }
         }
-
         else{
             // terminale per la scrittura dei comandi 
             printf("insert first device: ");  //sostituire con IO POSIX
@@ -103,7 +101,6 @@ int main(int argc, char *argv[]){
                         exit(EXIT_SUCCESS);
                     }
                 }
-                //sleep(1); 
             }
         }   
     }
