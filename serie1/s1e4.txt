@@ -1,0 +1,14 @@
+ls -a
+exit
+man
+git status 
+man git
+ls -a
+man sudo
+
+s1e2
+
+
+
+
+ls
