@@ -1,16 +1,45 @@
+/****************************************************************
+ * @file    s1e4.c
+ * @date    22.03.21
+ * @version 1.0
+ * @author  Nicola Borkowetz
+ * 
+ ****************************************************************
+ * 
+ * @brief   exercise 4 of the serie1 
+ *          (course of coucurrent and event-driven programming)
+ *          
+ *          the aim is to write a command line interpreter that 
+ *          keeps a log of command recived (file s1e4.txt)
+ * 
+ *          only I/O POSIX functions are allowed
+ ****************************************************************/
+
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include <stdio.h>
-
 #define BUFFER_LEN 100
 
+/****************************************************************
+ * PRIVATE FUNCTIONS
+ ****************************************************************/
+
+/****************************************************************
+ * @brief  display the shell prompt
+ * @param  -
+ * @return -  
+ ****************************************************************/
 void printPrompt(){
 	write(STDOUT_FILENO, "MY_SHELL : ", 12);
 }
 
+/****************************************************************
+ * @brief  display a welcome message
+ * @param  -
+ * @return -  
+ ****************************************************************/
 void printInitMessage(){
     write(STDOUT_FILENO, "**************************************************************\n", 64);
     write(STDOUT_FILENO, "*WELCOME                                                     *\n", 64);
@@ -20,6 +49,12 @@ void printInitMessage(){
     write(STDOUT_FILENO, "**************************************************************\n", 64);
 }
 
+/****************************************************************
+ * @brief  if the string recived is equal to "exit\n"
+ * @param  string the string to be checked
+ * @return 1 if the string is equal to "exit\n"
+ *         0 otherwise  
+ ****************************************************************/
 int checkExitPattern(char string[]){
     const char EXIT_PATTERN[] = "exit\n";
 
@@ -33,11 +68,10 @@ int checkExitPattern(char string[]){
     return 1; 
 }
 
-
+/****************************************************************
+ * PRIVATE FUNCTIONS
+ ****************************************************************/
 int main(int argc, char *argv[]){
-    const char EXIT_PATTERN[] = "exit\n";
-    
-
     int descriptor;
     char command[BUFFER_LEN] = "";
 

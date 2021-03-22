@@ -1,6 +1,7 @@
 ls -a
+ls
 exit
-man
+
 git status 
 man git
 ls -a

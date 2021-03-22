@@ -1,3 +1,6 @@
+#Makefile for the serie1
+#course of coucurrent and event-driven programming
+
 SRC = $(wildcard *.c)
 EXE = $(SRC:%.c=%)
 
