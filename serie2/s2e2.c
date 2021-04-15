@@ -41,13 +41,20 @@ int status = 0;
  * @param  -
  * @return -  
  ****************************************************************/
-void* print(void *arg){
-   pthread_t *thread = (pthread_t*)arg; 
+void* print(void *position){
+    int pos = (int) position;
 
-   if(pthread_self() == thread[status]){
-       printf("%s", message[status]);
-       status++;
-   }
+    while(1){
+        while(status != pos);
+
+        printf("%c", message[pos]);
+    
+        if(status < 4){
+            status++;
+        } else {
+            status = 0;
+        }
+    }
 }
 
 /****************************************************************
@@ -55,13 +62,14 @@ void* print(void *arg){
  ****************************************************************/
 
 int main(int argc, char *argv[]){
-    
     pthread_t threads[5];
 
     //create the threads
     for(int i = 0; i < 5; i++){
-        pthread_create(&threads[i], NULL, print, (void*)threads);
+        pthread_create(&threads[i], NULL, print, (void *)i);
     }  
 
-    while(1);
+    for(int i = 0; i < 5; i++){
+        pthread_join(threads[i], NULL);
+    }
 }
